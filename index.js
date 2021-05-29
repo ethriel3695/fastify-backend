@@ -1,13 +1,21 @@
+const rootRoute = require('./routes/root');
+const swagger = require('./config/swagger');
+
 const fastify = require('fastify')({
   logger: true,
 });
 
-fastify.register(require('./routes/root'));
+fastify.register(rootRoute);
+fastify.register(require('fastify-swagger'), swagger.options);
 
-fastify.listen(3000, function (err, address) {
-  if (err) {
+const start = async () => {
+  try {
+    await fastify.listen(3000);
+    fastify.swagger();
+    fastify.log.info(`server listening on ${fastify.server.address().port}`);
+  } catch (err) {
     fastify.log.error(err);
     process.exit(1);
   }
-  fastify.log.info(`server listening on ${address}`);
-});
+};
+start();

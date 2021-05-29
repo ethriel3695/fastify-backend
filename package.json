@@ -9,6 +9,7 @@
   "dependencies": {
     "fastify": "^3.17.0",
     "fastify-plugin": "^3.0.0",
+    "fastify-swagger": "^4.7.0",
     "nodemon": "^2.0.7"
   },
   "scripts": {
